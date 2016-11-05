@@ -4,16 +4,19 @@
 // Deep observer plugin for Knockout http://knockoutjs.com/
 // (c) Ziad Jeeroburkhan
 // License: MIT (http://www.opensource.org/licenses/mit-license.php)
-; (function (factory) {
-    // CommonJS
+; (function (factory, global) {
     if (typeof require === 'function' && typeof exports === 'object' && typeof module === 'object') {
+
+        // CommonJS
         factory(require('knockout'));
-        // AMD
     } else if (typeof define === 'function' && define.amd) {
+
+        // AMD
         define(['knockout'], factory);
-        // Normal script tag
     } else {
-        factory(window.ko);
+
+        // Normal script tag
+        factory(global.ko);
     }
 }(function (ko) {
 ko.subscribable.fn['watch'] = function (targetOrCallback, options, evaluatorCallback, context) {
@@ -254,9 +257,9 @@ ko['watch'] = function (target, options, evaluatorCallback, context) {
                 }
                 ko.utils.arrayForEach(changes, function (item) {
                     if (options.splitArrayChanges !== false) {
-                        var returnValue = evaluatorCallback.call(context, parents, child, item);
-                        if (returnValue !== undefined)
-                            context(returnValue);
+                    var returnValue = evaluatorCallback.call(context, parents, child, item);
+                    if (returnValue !== undefined)
+                        context(returnValue);
                     }
 
                     if (!item.moved) {
@@ -264,10 +267,10 @@ ko['watch'] = function (target, options, evaluatorCallback, context) {
                         if (options.async === false) {
                             watchChildren(item.value, (keepOffParentList ? null : child), parents, item.status === 'deleted');
                         } else {
-                            setTimeout(function () {
-                                watchChildren(item.value, (keepOffParentList ? null : child), parents, item.status === 'deleted');
+                        setTimeout(function () {
+                            watchChildren(item.value, (keepOffParentList ? null : child), parents, item.status === 'deleted');
                             });
-                        }
+                    }
                     }
                 });
             }, undefined, 'arrayChange')._watcher = context;
@@ -288,7 +291,7 @@ ko['watch'] = function (target, options, evaluatorCallback, context) {
                             setTimeout(function () {
                                 watchChildren(child(), (keepOffParentList ? null : child), parents, false, true);
                             });
-                        }
+                }
                     }
                 }
 
@@ -330,4 +333,9 @@ ko['watch'] = function (target, options, evaluatorCallback, context) {
     };
 };
 
-}));
+},
+    typeof global !== "undefined" ? global :
+    typeof self !== "undefined" ? self :
+    typeof window !== "undefined" ? window :
+    {}
+));

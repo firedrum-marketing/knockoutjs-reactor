@@ -32,7 +32,7 @@ module.exports = function(grunt) {
 
         uglify: {
             options: {
-                footer: "window.foo = \"<%= pkg.version %>\";",
+                footer: "(typeof global !== \"undefined\" ? global : typeof self !== \"undefined\" ? self : typeof window !== \"undefined\" ? window : {}).foo = \"<%= pkg.version %>\";",
                 output: {
                     comments: '/^!/'
                 }
@@ -60,7 +60,7 @@ module.exports = function(grunt) {
                       // 'https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js'
                       './node_modules/knockout/build/output/knockout-latest.js'
                     ]
-                }
+        }
             }
         }
     });
