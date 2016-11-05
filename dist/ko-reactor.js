@@ -2,7 +2,21 @@
 // (c) Ziad Jeeroburkhan
 // License: MIT (http://www.opensource.org/licenses/mit-license.php)
 // Version 1.3.6
+; (function (factory, global) {
+    if (typeof require === 'function' && typeof exports === 'object' && typeof module === 'object') {
 
+		// CommonJS
+        factory(require('knockout'));
+    } else if (typeof define === 'function' && define.amd) {
+
+		// AMD
+        define(['knockout'], factory);
+    } else {
+
+		// Normal script tag
+        factory(global.ko);
+    }
+}(function (ko) {
 ko.subscribable.fn['watch'] = function (targetOrCallback, options, evaluatorCallback, context) {
     /// <summary>
     ///     Track and manage changes within the chained observable down to any given level. 
@@ -290,3 +304,10 @@ ko['watch'] = function (target, options, evaluatorCallback, context) {
         }
     };
 };
+
+},
+	typeof global !== "undefined" ? global :
+	typeof self !== "undefined" ? self :
+	typeof window !== "undefined" ? window :
+	{}
+));

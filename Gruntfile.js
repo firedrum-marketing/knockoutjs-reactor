@@ -33,7 +33,7 @@ module.exports = function(grunt) {
         uglify: {
             options: {
                 //banner: "/*! " + banner + " */\n",
-                footer: "window.foo = \"<%= pkg.version %>\";",
+                footer: "(typeof global !== \"undefined\" ? global : typeof self !== \"undefined\" ? self : typeof window !== \"undefined\" ? window : {}).foo = \"<%= pkg.version %>\";",
                 preserveComments: 'some'
             },
             main: {

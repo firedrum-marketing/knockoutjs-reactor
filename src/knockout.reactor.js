@@ -2,16 +2,19 @@
 // (c) Ziad Jeeroburkhan
 // License: MIT (http://www.opensource.org/licenses/mit-license.php)
 // Version 1.3.6
-; (function (factory) {
-    // CommonJS
+; (function (factory, global) {
     if (typeof require === 'function' && typeof exports === 'object' && typeof module === 'object') {
+
+		// CommonJS
         factory(require('knockout'));
-        // AMD
     } else if (typeof define === 'function' && define.amd) {
+
+		// AMD
         define(['knockout'], factory);
-        // Normal script tag
     } else {
-        factory(window.ko);
+
+		// Normal script tag
+        factory(global.ko);
     }
 }(function (ko) {
 ko.subscribable.fn['watch'] = function (targetOrCallback, options, evaluatorCallback, context) {
@@ -302,4 +305,9 @@ ko['watch'] = function (target, options, evaluatorCallback, context) {
     };
 };
 
-}));
+},
+	typeof global !== "undefined" ? global :
+	typeof self !== "undefined" ? self :
+	typeof window !== "undefined" ? window :
+	{}
+));
