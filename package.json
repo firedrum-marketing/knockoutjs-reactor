@@ -14,7 +14,7 @@
     "build-watch": "./node_modules/grunt-cli/bin/grunt develop"
   },
   "dependencies": {
-    "knockout": "3.0.0 - 3.5.0-beta"
+    "knockout": "github:jhorowitz-firedrum/knockout"
   },
   "devDependencies": {
     "grunt": "~1.0.1",
