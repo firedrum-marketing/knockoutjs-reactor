@@ -14,7 +14,7 @@
     "build-watch": "./node_modules/grunt-cli/bin/grunt develop"
   },
   "dependencies": {
-    "knockout": "github:jhorowitz-firedrum/knockout"
+    "knockout": "github:firedrum-marketing/knockout"
   },
   "devDependencies": {
     "grunt": "~1.0.1",
